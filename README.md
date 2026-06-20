@@ -134,7 +134,7 @@ routes/
 
 ## Screenshots
 
-> Add screenshots here (e.g., `screenshots/dashboard.png`, `screenshots/wedding-gallery.png`)
+![PhotoStudio Screenshot](public/s1.png)
 
 ---
 
