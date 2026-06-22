@@ -31,6 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware([AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/weddings', [AdminController::class, 'weddings'])->name('weddings');
         Route::get('/weddings/{wedding}', [AdminController::class, 'show'])->name('weddings.show');
+        Route::get('/weddings/{wedding}/download', [AdminController::class, 'download'])->name('weddings.download');
         Route::get('/users', [UserController::class, 'index'])->name('users');
         Route::post('/users', [UserController::class, 'store'])->name('users.store');
         Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');

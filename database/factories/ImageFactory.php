@@ -17,7 +17,7 @@ class ImageFactory extends Factory
     {
         return [
             'wedding_id' => Wedding::factory(),
-            'image_path' => 'weddings/' . fake()->uuid() . '.jpg',
+            'image_path' => 'weddings/'.fake()->uuid().'.jpg',
         ];
     }
 }

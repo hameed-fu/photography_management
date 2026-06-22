@@ -6,6 +6,7 @@ use App\Http\Requests\StoreWeddingRequest;
 use App\Models\Wedding;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -51,10 +52,9 @@ class WeddingController extends Controller
 
     public function destroy(Wedding $wedding): RedirectResponse
     {
-         
 
         foreach ($wedding->images as $image) {
-            \Illuminate\Support\Facades\Storage::disk('public')->delete($image->image_path);
+            Storage::disk('public')->delete($image->image_path);
         }
 
         $wedding->delete();

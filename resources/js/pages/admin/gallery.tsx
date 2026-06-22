@@ -1,5 +1,5 @@
 import { Head, Link, router } from '@inertiajs/react';
-import { ArrowLeft, Calendar, ImageIcon, Trash2, User } from 'lucide-react';
+import { ArrowLeft, Calendar, Download, ImageIcon, Trash2, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ImageGallery } from '@/components/image-gallery';
 import { dashboard as dashboardRoute } from '@/routes';
@@ -61,14 +61,22 @@ export default function AdminGallery({ wedding }: Props) {
                             </div>
                         </div>
                     </div>
-                    <Button
-                        variant="destructive"
-                        size="sm"
-                        onClick={deleteWedding}
-                    >
-                        <Trash2 className="mr-2 size-4" />
-                        Delete Project
-                    </Button>
+                    <div className="flex items-center gap-2">
+                        <Button variant="outline" size="sm" asChild>
+                            <a href={admin.weddings.download(wedding.id).url}>
+                                <Download className="mr-2 size-4" />
+                                Download All
+                            </a>
+                        </Button>
+                        <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={deleteWedding}
+                        >
+                            <Trash2 className="mr-2 size-4" />
+                            Delete Project
+                        </Button>
+                    </div>
                 </div>
 
                 <ImageGallery

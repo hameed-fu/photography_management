@@ -30,7 +30,6 @@ class ImageController extends Controller
         return back()->with('flash', ['toast' => ['type' => 'success', 'message' => "{$count} image(s) deleted."]]);
     }
 
-
     public function upload(UploadImagesRequest $request, Wedding $wedding): RedirectResponse
     {
         foreach ($request->file('images') as $file) {

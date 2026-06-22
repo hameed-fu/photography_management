@@ -16,7 +16,7 @@ class WeddingFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->name() . ' & ' . fake()->name() . ' Wedding',
+            'title' => fake()->name().' & '.fake()->name().' Wedding',
             'event_date' => fake()->date(),
             'user_id' => User::factory(),
         ];
