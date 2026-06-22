@@ -82,6 +82,7 @@ export default function AdminGallery({ wedding }: Props) {
                 <ImageGallery
                     images={wedding.images}
                     onDelete={deleteImage}
+                    bulkDeleteRoute={images.destroyBatch.url()}
                 />
             </div>
         </>

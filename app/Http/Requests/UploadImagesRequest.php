@@ -6,6 +6,14 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UploadImagesRequest extends FormRequest
 {
+    public const array ALLOWED_EXTENSIONS = [
+        'jpeg', 'png', 'jpg', 'gif', 'webp',
+        'nef', 'cr2', 'cr3', 'arw', 'dng',
+        'orf', 'rw2', 'raf', 'pef', 'srw',
+        'tif', 'tiff', 'bmp', 'heic', 'heif',
+        'svg', 'ico', 'psd',
+    ];
+
     public function authorize(): bool
     {
         return true;
@@ -15,16 +23,25 @@ class UploadImagesRequest extends FormRequest
     {
         return [
             'images' => ['required', 'array'],
-            'images.*' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:10240'],
+            'images.*' => [
+                'required',
+                'file',
+                'mimes:' . implode(',', self::ALLOWED_EXTENSIONS),
+                'max:204800',
+                function (string $attribute, mixed $value, \Closure $fail) {
+                    $ext = strtolower($value->getClientOriginalExtension());
+                    if (!in_array($ext, self::ALLOWED_EXTENSIONS, true)) {
+                        $fail("Unsupported format (.{$ext}). Allowed: " . implode(', ', self::ALLOWED_EXTENSIONS));
+                    }
+                },
+            ],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'images.*.image' => 'Each file must be an image.',
-            'images.*.mimes' => 'Images must be jpeg, png, jpg, gif, or webp format.',
-            'images.*.max' => 'Each image must not exceed 10MB.',
+            'images.*.max' => 'Each image must not exceed 20MB.',
         ];
     }
 }
